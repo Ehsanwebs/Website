@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Details & Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css">
+</head>
+
+<body>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="container">
+        <!-- Room Details Section -->
+        <section id="room-details">
+            <div class="details-content">
+                <img src="assets/room1.jpg" alt="Deluxe Queen Room" class="room-image">
+                <div class="room-label">Deluxe Queen (Aircond)</div>
+                <div class="details-text">
+                    <h1>Room Features</h1>
+                    <ul>
+                        <li>King-size bed</li>
+                        <li>Air-conditioned</li>
+                        <li>bathroom with hot shower</li>
+                        <li>Free Wi-Fi</li>
+                        <li>Flat-screen TV</li>
+                        <li>Mini-fridge</li>
+                        <li>Room service available</li>
+                    </ul>
+                    <h2>Pricing</h2>
+                    <p>RM70 per night</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Calendar Section -->
+        <section id="booking">
+            <h1>Book Your Stay</h1>
+            <form id="booking-form">
+                <div class="calendar-group">
+                    <div class="form-group">
+                        <label for="checkin">Check-In Date</label>
+                        <div id="checkin-calendar" class="calendar"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout">Check-Out Date</label>
+                        <div id="checkout-calendar" class="calendar"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+                </div>
+            </form>
+        </section>
+
+        <!-- Confirm Booking Button -->
+        <div class="confirm-booking">
+            <button type="submit" form="booking-form" class="btn-confirm">Confirm Booking</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+    <script>
+        flatpickr("#checkin-calendar", {
+            inline: true,
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                document.getElementById('checkout-calendar')._flatpickr.set('minDate', new Date(dateStr).fp_incr(1));
+            }
+        });
+
+        flatpickr("#checkout-calendar", {
+            inline: true,
+            minDate: new Date().fp_incr(1),
+            dateFormat: "Y-m-d",
+        });
+
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Booking Confirmed!');
+        });
+    </script>
+
+</body>
+</html>
